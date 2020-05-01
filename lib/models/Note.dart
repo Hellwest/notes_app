@@ -6,8 +6,12 @@ class Note {
 
   Note({ this.id, this.body = '' });
 
-  String get noteBody {
-    return this.body.isNotEmpty ? this.body : Note.DEFAULT_NAME;
+  String get noteTitle {
+    int lineLength = this.body.indexOf("\n");
+
+    String firstLine = lineLength > 0 ? this.body.substring(0, lineLength) : this.body;
+
+    return this.body.isNotEmpty ? firstLine : Note.DEFAULT_NAME;
   }
   
   int get characters {

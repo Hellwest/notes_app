@@ -71,7 +71,7 @@ class HomeScreen extends StatelessWidget {
                 color: Colors.red,
               ),
               child: ListTile(
-                title: Text(note.noteBody),
+                title: Text(note.noteTitle),
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(

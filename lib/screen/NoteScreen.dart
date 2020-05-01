@@ -42,7 +42,7 @@ class NoteScreenState extends State<NoteScreen> {
         title: Consumer<NoteCollection>(
           builder: (context, notes, child) {
             return Text(
-              notes.getNote(_note.id).noteBody,
+              notes.getNote(_note.id).noteTitle,
             );
           },
         ),
