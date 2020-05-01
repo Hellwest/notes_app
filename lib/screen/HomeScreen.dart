@@ -7,13 +7,20 @@ import 'package:uuid/uuid.dart';
 
 class HomeScreen extends StatelessWidget {
   var uuid = new Uuid();
-  var collection = NoteCollection();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Notes")
+        title: Consumer<NoteCollection>(
+          builder: (context, notes, child) {
+            if (notes.count == 0) {
+              return Text('Notes');
+            }
+            
+            return Text('Notes (${notes.count})');
+          },
+        )
       ),
 
       body: _buildNotesList(),
@@ -55,8 +62,26 @@ class HomeScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             var note = allNotes[index];
 
-            return ListTile(
-              title: Text(note.body),
+            return Dismissible(
+              key: Key(note.id),
+              onDismissed: (direction) {
+                Provider.of<NoteCollection>(context).deleteNote(note.id);
+              },
+              background: Container(
+                color: Colors.red,
+              ),
+              child: ListTile(
+                title: Text(note.noteBody),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => NoteScreen(
+                        note: note,
+                      ),
+                    )
+                  );
+                },
+              ),
             );
           },
         );

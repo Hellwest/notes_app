@@ -64,6 +64,28 @@ class NoteScreenState extends State<NoteScreen> {
                 ),
               ),
             ),
+          ),
+          ConstrainedBox(
+            constraints: BoxConstraints(minWidth: double.infinity),
+            child: Container(
+              child: Consumer<NoteCollection>(
+                builder: (context, notes, child) {
+                  Note note = notes.getNote(_note.id);
+
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text('${note.characters} characters', style: TextStyle(color: Colors.white)),
+                      Text('${note.words} words', style: TextStyle(color: Colors.white)),
+                    ],
+                  );
+                },
+              ),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              padding: EdgeInsets.all(20),
+            ),
           )
         ],
       ),

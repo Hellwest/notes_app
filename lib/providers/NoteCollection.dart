@@ -19,10 +19,16 @@ class NoteCollection extends ChangeNotifier {
   }
 
   void updateNote(String id, String body) {
-      var currentNote = _notes.where((note) => note.id == id).first;
+    var currentNote = _notes.where((note) => note.id == id).first;
 
-      currentNote.body = body;
+    currentNote.body = body;
 
-      notifyListeners();
-    }
+    notifyListeners();
+  }
+
+  void deleteNote(String id) {
+    _notes.removeWhere((note) => note.id == id);
+
+    notifyListeners();
+  }
 }
