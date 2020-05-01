@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/providers/NoteCollection.dart';
 import 'package:notes_app/screen/HomeScreen.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(
+  ChangeNotifierProvider(
+    child: MyApp(),
+    builder: (context) => NoteCollection(),
+  )
+);
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
